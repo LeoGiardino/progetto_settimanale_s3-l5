@@ -17,7 +17,7 @@ export default function Navigation() {
     }
   }, [location.pathname]);
 
-  const handleSearch = (e) => {
+  function handleSearch(e) {
     setSearchTerm(e.target.value);
 
     if (searchTerm) {
@@ -39,6 +39,12 @@ export default function Navigation() {
     }
   };
 
+  useEffect(() => {
+    
+    handleSearch({ target: { value: searchTerm } });
+  }, [searchTerm]);
+
+
   return (
     <>
       <Navbar className='container' expand="lg">
@@ -56,13 +62,14 @@ export default function Navigation() {
           )}
         </Navbar.Collapse>
       </Navbar>
-      {searchTerm.length > 0 && !hideSearch && (
+      {searchTerm.length > 0 && !hideSearch &&  (
   <div>
     <h1 className='my-5 text-center'>Ricerca</h1>
     <main>
       <div style={{ width: '95%', marginBottom: '50px' }}>
         <div className="carousel-container">
           {searchResults.map(result => (
+            result.yoast_head_json.og_image &&
             <Link className='text-decoration-none' to={`/card/${result.id}`} key={result.id}>
               <Card key={result.id} className='mb-3 carousel-slide' style={{ width: '300px', height: '534px', cursor: 'pointer' }}>
                 <Card.Img style={{ height: '360px', width: '300px', objectFit: 'cover' }} variant="top" src={result.yoast_head_json.og_image[0].url} />
