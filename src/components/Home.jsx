@@ -28,6 +28,8 @@ export default function Home() {
             });
     }, []);
 
+
+
     if (loading) {
         return <div>Caricamento...</div>;
     }
@@ -36,10 +38,13 @@ export default function Home() {
         return <div>Si è verificato un errore: {error.message}</div>;
     }
 
+    
+
     return (
         <>
-         
+        
             <h1 className='my-5 text-center'>Articoli</h1>
+
             <main>
                 <div style={{ width: '95%', marginBottom: '50px' }}>
 
